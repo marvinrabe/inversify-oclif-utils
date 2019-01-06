@@ -2,10 +2,11 @@ import { decorate, injectable } from 'inversify'
 import { interfaces } from './interfaces'
 import { METADATA_KEY } from './constants'
 
-export function command () {
+export function command (command: string) {
   return function (target: any) {
 
     let currentMetadata: interfaces.CommandMetadata = {
+      command: command,
       target: target
     }
 
