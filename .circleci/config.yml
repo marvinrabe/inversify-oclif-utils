@@ -39,7 +39,7 @@ jobs:
 
 workflows:
   version: 2
-  "test123":
+  "oclif-plugin-inversify":
     jobs:
       - node-latest
       - node-8
