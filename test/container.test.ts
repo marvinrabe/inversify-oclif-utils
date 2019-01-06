@@ -1,4 +1,3 @@
-import { ComplexCommand, SimpleCommand } from './commands.setup'
 import * as expect from 'expect'
 import Container from '../src/container'
 import { Container as InversifyContainer } from 'inversify'
