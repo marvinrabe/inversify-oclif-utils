@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import 'reflect-metadata'
+require('reflect-metadata')
 
 require('@oclif/command').run()
 .catch(require('@oclif/errors/handle'))
