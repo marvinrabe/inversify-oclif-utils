@@ -1,6 +1,8 @@
 import { decorate, injectable } from 'inversify'
 import { interfaces } from './interfaces'
 import { METADATA_KEY } from './constants'
+import getDecorators from 'inversify-inject-decorators'
+import container from './container'
 
 export function command (command: string) {
   return function (target: any) {
@@ -33,4 +35,9 @@ export function command (command: string) {
     )
 
   }
+}
+
+export function inject (type: any) {
+  let { lazyInject } = getDecorators(container.inversify)
+  return lazyInject(type)
 }

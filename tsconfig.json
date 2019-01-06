@@ -9,7 +9,7 @@
     "target": "es2017",
     "composite": true,
     "lib": ["es6", "dom"],
-    "types": ["inversify", "reflect-metadata"],
+    "types": ["inversify", "reflect-metadata", "mocha"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
