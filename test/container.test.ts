@@ -4,10 +4,10 @@ import { Container as InversifyContainer } from 'inversify'
 
 describe('Container', () => {
   it('returns configs', () => {
-    const configs = Container.configs
+    const commands = Container.configs.map(x => x.command)
 
-    expect(configs.filter(x => x.command === 'simple').length).toBe(1)
-    expect(configs.filter(x => x.command === 'complex:command').length).toBe(1)
+    expect(commands).toContain('simple')
+    expect(commands).toContain('complex:foo')
   })
 
   it('returns IoC container', () => {

@@ -8,7 +8,7 @@ export default class InversifyPlugin extends Config.Plugin {
   }
 
   get topics () {
-    return []
+    return [{ name: 'complex' }]
   }
 
   get commandIDs (): string[] {

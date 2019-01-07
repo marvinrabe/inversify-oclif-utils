@@ -22,7 +22,7 @@ export class SimpleCommand extends Command {
   }
 }
 
-@command('complex:command')
+@command('complex:foo')
 export class ComplexCommand extends Command {
 
   @inject(FooService)
