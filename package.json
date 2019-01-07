@@ -3,6 +3,7 @@
   "description": "Create oclif commands with inversify",
   "version": "1.0.0",
   "author": "Marvin Rabe",
+  "homepage": "https://github.com/marvinrabe/oclif-plugin-inversify",
   "bugs": "https://github.com/marvinrabe/oclif-plugin-inversify/issues",
   "dependencies": {
     "@oclif/command": "^1",
@@ -16,8 +17,6 @@
     "@oclif/dev-cli": "^1",
     "@oclif/plugin-help": "^2",
     "@oclif/test": "^1",
-    "@oclif/tslint": "^3",
-    "@types/chai": "^4",
     "@types/expect": "^1.20.3",
     "@types/mocha": "^5.2.5",
     "@types/node": "^10",
@@ -40,7 +39,6 @@
     "/oclif.manifest.json",
     "/yarn.lock"
   ],
-  "homepage": "https://github.com/marvinrabe/oclif-plugin-inversify",
   "keywords": [
     "oclif-plugin",
     "inversify",
@@ -48,8 +46,6 @@
   ],
   "license": "MIT",
   "oclif": {
-    "commands": "./lib/commands",
-    "bin": "oclif-example",
     "devPlugins": [
       "@oclif/plugin-help"
     ],
