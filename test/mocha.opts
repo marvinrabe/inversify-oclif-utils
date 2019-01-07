@@ -1,7 +1,9 @@
 --require reflect-metadata
 --require ts-node/register
+--require source-map-support/register
+--full-trace
 --watch-extensions ts
 --recursive
 --reporter spec
---reporter json
 --timeout 5000
+test/**/*.test.ts
