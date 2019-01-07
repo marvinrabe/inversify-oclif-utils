@@ -38,6 +38,6 @@ export function command (command: string) {
 }
 
 export function inject (type: any) {
-  let { lazyInject } = getDecorators(container.inversify)
+  let { lazyInject } = getDecorators(container.inversify, false)
   return lazyInject(type)
 }

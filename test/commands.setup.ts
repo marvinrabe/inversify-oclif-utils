@@ -1,18 +1,15 @@
-import 'reflect-metadata'
+import { injectable } from 'inversify'
 import { command, container, inject } from '../src'
 import Command from '@oclif/command/lib/command'
 
-import getDecorators from 'inversify-inject-decorators'
-import { injectable } from 'inversify'
-
-let { lazyInject } = getDecorators(container.inversify)
-
 @injectable()
-class FooService {
+export class FooService {
   message () {
     return 'Hello World from FooService.'
   }
 }
+
+container.inversify.bind<FooService>('FooService').to(FooService)
 
 @command('simple')
 export class SimpleCommand extends Command {
@@ -25,8 +22,8 @@ export class SimpleCommand extends Command {
 @command('complex:foo')
 export class ComplexCommand extends Command {
 
-  @inject(FooService)
-  protected fooService: FooService = { message () { return 'FooService not injected.' } }
+  @inject('FooService')
+  protected fooService!: FooService
 
   async run () {
     this.log(this.fooService.message())

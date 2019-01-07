@@ -1,4 +1,3 @@
-import './commands.setup'
 import { expect, test } from '@oclif/test'
 
 describe('Integration', () => {
