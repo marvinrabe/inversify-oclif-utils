@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import { command, container, inject, Command } from '../src'
+import { command, inject, Command, container } from '../src'
 
 @injectable()
 export class FooService {
@@ -8,7 +8,7 @@ export class FooService {
   }
 }
 
-container.inversify.bind<FooService>('FooService').to(FooService)
+container.inversify.bind(FooService).toSelf();
 
 @command('simple')
 export class SimpleCommand extends Command {
@@ -21,7 +21,7 @@ export class SimpleCommand extends Command {
 @command('complex:foo')
 export class ComplexCommand extends Command {
 
-  @inject('FooService')
+  @inject(FooService)
   protected fooService!: FooService
 
   async run () {

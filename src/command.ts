@@ -1,23 +1,25 @@
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { Command as OclifCommand } from '@oclif/command'
 import * as Config from '@oclif/config'
+import Container from './container'
+import { TYPE } from './constants'
 
 @injectable()
 export abstract class Command extends OclifCommand {
-  constructor (argv: string[], config: Config.IConfig) {
+  constructor (
+    @inject(TYPE.OclifArgv) argv: string[],
+    @inject(TYPE.OclifConfig) config: Config.IConfig
+  ) {
     super(argv, config)
   }
 
   static run: Config.Command.Class['run'] = async function (this: Config.Command.Class, argv?: string[], opts?) {
-    if (!argv) argv = process.argv.slice(2)
-    // Register argv
 
-    const config = await Config.load(opts || module.parent && module.parent.parent && module.parent.parent.filename || __dirname)
-    // Register config
+    const args = argv || process.argv.slice(2)
 
-    let cmd = new this(argv, config)
-    // load from container
+    Container.bindConstant(TYPE.OclifArgv, args)
+    Container.bindConstant(TYPE.OclifConfig, await Config.load(opts || module.parent && module.parent.parent && module.parent.parent.filename || __dirname))
 
-    return cmd._run(argv)
+    return Container.inversify.resolve(this)._run(args)
   }
 }

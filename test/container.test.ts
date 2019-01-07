@@ -10,6 +10,18 @@ describe('Container', () => {
     expect(commands).toContain('complex:foo')
   })
 
+  it('binds constant values', () => {
+    let symbol = Symbol('TEST')
+
+    Container.bindConstant(symbol, 1)
+
+    expect(Container.inversify.get<Number>(symbol)).toBe(1)
+
+    Container.bindConstant(symbol, 2)
+
+    expect(Container.inversify.get<Number>(symbol)).toBe(2)
+  })
+
   it('returns IoC container', () => {
     expect(Container.inversify instanceof InversifyContainer).toBeTruthy()
   })

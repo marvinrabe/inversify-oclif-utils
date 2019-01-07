@@ -1,4 +1,6 @@
 import { expect, test } from '@oclif/test'
+import { container } from '../src'
+import { FooService } from './commands.setup'
 
 describe('Integration', () => {
   test

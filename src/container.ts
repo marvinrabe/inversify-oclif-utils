@@ -24,6 +24,14 @@ class Container {
     ) || []
   }
 
+  bindConstant<T> (symbol: symbol, value: T) {
+    if (this.inversify.isBound(symbol)) {
+      this.inversify.rebind<T>(symbol).toConstantValue(value)
+    } else {
+      this.inversify.bind<T>(symbol).toConstantValue(value)
+    }
+  }
+
 }
 
 export const container = new Container()
