@@ -8,6 +8,7 @@ Create commands with inversify
 [![Downloads/week](https://img.shields.io/npm/dw/oclif-plugin-inversify.svg)](https://npmjs.org/package/oclif-plugin-inversify)
 [![License](https://img.shields.io/npm/l/oclif-plugin-inversify.svg)](https://github.com/marvinrabe/oclif-plugin-inversify/blob/master/package.json)
 [![CircleCI](https://circleci.com/gh/marvinrabe/inversify-oclif-utils/tree/master.svg?style=shield)](https://circleci.com/gh/marvinrabe/inversify-oclif-utils/tree/master)
+[![codecov](https://codecov.io/gh/marvinrabe/inversify-oclif-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/marvinrabe/inversify-oclif-utils)
 
 <!-- toc -->
 * [Usage](#usage)
