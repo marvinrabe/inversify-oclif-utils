@@ -1,6 +1,5 @@
 import * as Config from '@oclif/config'
-import { CommandMetadata } from './interfaces'
-import Container from './container'
+import { CommandMetadata, getCommandMetadata } from './reflection'
 
 export default class InversifyPlugin extends Config.Plugin {
   get hooks () {
@@ -12,11 +11,11 @@ export default class InversifyPlugin extends Config.Plugin {
   }
 
   get commandIDs (): string[] {
-    return Container.configs.map((c: CommandMetadata) => c.command)
+    return getCommandMetadata().map((c: CommandMetadata) => c.command)
   }
 
   get commands (): Config.Command.Plugin[] {
-    return Container.configs.map((x: CommandMetadata) => {
+    return getCommandMetadata().map((x: CommandMetadata) => {
       let command = x.target
       command.id = x.command
       command.load = () => {

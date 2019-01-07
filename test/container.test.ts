@@ -1,36 +1,30 @@
 import * as expect from 'expect'
-import Container from '../src/container'
+import { bindConstant, getContainer, useContainer } from '../src/container'
 import { Container as InversifyContainer } from 'inversify'
 
 describe('Container', () => {
-  it('returns configs', () => {
-    const commands = Container.configs.map(x => x.command)
-
-    expect(commands).toContain('simple')
-    expect(commands).toContain('complex:foo')
-  })
 
   it('binds constant values', () => {
     let symbol = Symbol('TEST')
 
-    Container.bindConstant(symbol, 1)
+    bindConstant(symbol, 1)
 
-    expect(Container.inversify.get<Number>(symbol)).toBe(1)
+    expect(getContainer().get<Number>(symbol)).toBe(1)
 
-    Container.bindConstant(symbol, 2)
+    bindConstant(symbol, 2)
 
-    expect(Container.inversify.get<Number>(symbol)).toBe(2)
+    expect(getContainer().get<Number>(symbol)).toBe(2)
   })
 
   it('returns IoC container', () => {
-    expect(Container.inversify instanceof InversifyContainer).toBeTruthy()
+    expect(getContainer() instanceof InversifyContainer).toBeTruthy()
   })
 
   it('assigns own IoC container', () => {
     const myContainer = new InversifyContainer()
 
-    Container.inversify = myContainer
+    useContainer(myContainer)
 
-    expect(Container.inversify).toBe(myContainer)
+    expect(getContainer()).toBe(myContainer)
   })
 })

@@ -1,5 +1,5 @@
-import { injectable } from 'inversify'
-import { command, inject, Command, container } from '../src'
+import { inject, injectable } from 'inversify'
+import { command, Command } from '../src'
 
 @injectable()
 export class FooService {
@@ -7,8 +7,6 @@ export class FooService {
     return 'Hello World from FooService.'
   }
 }
-
-container.inversify.bind(FooService).toSelf();
 
 @command('simple')
 export class SimpleCommand extends Command {

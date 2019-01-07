@@ -1,39 +1,22 @@
 import { Container as InversifyContainer, interfaces as inversifyInterfaces } from 'inversify'
-import { METADATA_KEY } from './constants'
-import { CommandMetadata } from './interfaces'
 
-class Container {
+let _container!: inversifyInterfaces.Container
 
-  private _container: inversifyInterfaces.Container | null = null
-
-  get inversify () {
-    if (!this._container) {
-      this._container = new InversifyContainer()
-    }
-    return this._container
-  }
-
-  set inversify (container: inversifyInterfaces.Container) {
-    this._container = container
-  }
-
-  get configs (): CommandMetadata[] {
-    return Reflect.getMetadata(
-      METADATA_KEY.command,
-      Reflect
-    ) || []
-  }
-
-  bindConstant<T> (symbol: symbol, value: T) {
-    if (this.inversify.isBound(symbol)) {
-      this.inversify.rebind<T>(symbol).toConstantValue(value)
-    } else {
-      this.inversify.bind<T>(symbol).toConstantValue(value)
-    }
-  }
-
+export function useContainer (container: inversifyInterfaces.Container) {
+  _container = container
 }
 
-export const container = new Container()
+export function getContainer () {
+  if (!_container) {
+    _container = new InversifyContainer()
+  }
+  return _container
+}
 
-export default container
+export function bindConstant<T> (symbol: symbol, value: T) {
+  if (getContainer().isBound(symbol)) {
+    getContainer().rebind<T>(symbol).toConstantValue(value)
+  } else {
+    getContainer().bind<T>(symbol).toConstantValue(value)
+  }
+}

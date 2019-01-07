@@ -1,8 +1,6 @@
 import { decorate, injectable } from 'inversify'
-import { CommandMetadata } from './interfaces'
+import { CommandMetadata } from './reflection'
 import { METADATA_KEY } from './constants'
-import getDecorators from 'inversify-inject-decorators'
-import container from './container'
 
 export function command (command: string) {
   return function (target: any) {
@@ -12,7 +10,6 @@ export function command (command: string) {
       target: target
     }
 
-    decorate(injectable(), target)
     Reflect.defineMetadata(METADATA_KEY.command, currentMetadata, target)
 
     // We need to create an array that contains the metadata of all
@@ -35,9 +32,4 @@ export function command (command: string) {
     )
 
   }
-}
-
-export function inject (type: any) {
-  let { lazyInject } = getDecorators(container.inversify, false)
-  return lazyInject(type)
 }

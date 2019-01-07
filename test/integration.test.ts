@@ -1,8 +1,9 @@
 import { expect, test } from '@oclif/test'
-import { container } from '../src'
 import { FooService } from './commands.setup'
+import { getContainer } from '../src/container'
 
 describe('Integration', () => {
+
   test
     .stdout()
     .command(['help'])
@@ -25,6 +26,9 @@ describe('Integration', () => {
     })
 
   test
+    .do(ctx => {
+      getContainer().bind(FooService).toSelf()
+    })
     .stdout()
     .command(['complex:foo'])
     .it('prints message from FooService', ctx => {
