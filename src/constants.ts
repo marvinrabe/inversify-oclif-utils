@@ -1,7 +1,5 @@
 export const TYPE = {
-  Command: Symbol.for('Command'),
-  OclifArgv: Symbol.for('OclifArgv'),
-  OclifConfig: Symbol.for('OclifConfig')
+  Command: Symbol.for('Command')
 }
 
 export const METADATA_KEY = {

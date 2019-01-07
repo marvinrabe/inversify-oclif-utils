@@ -12,11 +12,3 @@ export function getContainer () {
   }
   return _container
 }
-
-export function bindConstant<T> (symbol: symbol, value: T) {
-  if (getContainer().isBound(symbol)) {
-    getContainer().rebind<T>(symbol).toConstantValue(value)
-  } else {
-    getContainer().bind<T>(symbol).toConstantValue(value)
-  }
-}
