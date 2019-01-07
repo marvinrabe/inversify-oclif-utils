@@ -1,6 +1,6 @@
 import { Container as InversifyContainer, interfaces as inversifyInterfaces } from 'inversify'
 import { METADATA_KEY } from './constants'
-import { interfaces } from '../src'
+import { CommandMetadata } from './interfaces'
 
 class Container {
 
@@ -17,7 +17,7 @@ class Container {
     this._container = container
   }
 
-  get configs (): interfaces.CommandMetadata[] {
+  get configs (): CommandMetadata[] {
     return Reflect.getMetadata(
       METADATA_KEY.command,
       Reflect

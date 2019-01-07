@@ -5,6 +5,3 @@ export const TYPE = {
 export const METADATA_KEY = {
   command: 'container-oclif-utils:command'
 }
-
-export const DUPLICATED_COMMAND_NAME = (name: string) =>
-  `Two commands cannot have the same name: ${name}`

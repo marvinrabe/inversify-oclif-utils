@@ -1,5 +1,5 @@
 import * as Config from '@oclif/config'
-import { interfaces } from './interfaces'
+import { CommandMetadata } from './interfaces'
 import Container from './container'
 
 export default class InversifyPlugin extends Config.Plugin {
@@ -12,11 +12,11 @@ export default class InversifyPlugin extends Config.Plugin {
   }
 
   get commandIDs (): string[] {
-    return Container.configs.map((c: interfaces.CommandMetadata) => c.command)
+    return Container.configs.map((c: CommandMetadata) => c.command)
   }
 
   get commands (): Config.Command.Plugin[] {
-    return Container.configs.map((x: interfaces.CommandMetadata) => {
+    return Container.configs.map((x: CommandMetadata) => {
       let command = x.target
       command.id = x.command
       command.load = () => {

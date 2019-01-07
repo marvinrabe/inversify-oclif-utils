@@ -1,6 +1,5 @@
 import { injectable } from 'inversify'
-import { command, container, inject } from '../src'
-import Command from '@oclif/command/lib/command'
+import { command, container, inject, Command } from '../src'
 
 @injectable()
 export class FooService {

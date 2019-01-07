@@ -8,7 +8,12 @@
     "strict": true,
     "target": "es2017",
     "composite": true,
-    "types": ["inversify", "reflect-metadata", "mocha"],
+    "types": [
+      "node",
+      "inversify",
+      "reflect-metadata",
+      "mocha"
+    ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

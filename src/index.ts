@@ -1,4 +1,5 @@
 export { command, inject } from './decorators'
 export { TYPE } from './constants'
-export { interfaces } from './interfaces'
+export { CommandMetadata } from './interfaces'
+export { Command } from './command'
 export { container } from './container'

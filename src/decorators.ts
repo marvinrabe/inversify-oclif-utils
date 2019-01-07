@@ -1,5 +1,5 @@
 import { decorate, injectable } from 'inversify'
-import { interfaces } from './interfaces'
+import { CommandMetadata } from './interfaces'
 import { METADATA_KEY } from './constants'
 import getDecorators from 'inversify-inject-decorators'
 import container from './container'
@@ -7,7 +7,7 @@ import container from './container'
 export function command (command: string) {
   return function (target: any) {
 
-    let currentMetadata: interfaces.CommandMetadata = {
+    let currentMetadata: CommandMetadata = {
       command: command,
       target: target
     }
@@ -21,7 +21,7 @@ export function command (command: string) {
     // We attach metadata to the Reflect object itself to avoid
     // declaring additonal globals. Also, the Reflect is avaiable
     // in both node and web browsers.
-    const previousMetadata: interfaces.CommandMetadata[] = Reflect.getMetadata(
+    const previousMetadata: CommandMetadata[] = Reflect.getMetadata(
       METADATA_KEY.command,
       Reflect
     ) || []
