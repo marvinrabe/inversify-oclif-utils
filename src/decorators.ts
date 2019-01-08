@@ -1,5 +1,4 @@
-import { CommandMetadata } from './reflection'
-import { METADATA_KEY } from './constants'
+import { CommandMetadata, METADATA_KEY } from './reflection'
 
 export function command (command: string) {
   return function (target: any) {

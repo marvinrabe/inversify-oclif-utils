@@ -1,4 +1,6 @@
-import { METADATA_KEY } from './constants'
+export const METADATA_KEY = {
+  command: 'container-oclif-utils:command'
+}
 
 export interface CommandMetadata {
   command: string
