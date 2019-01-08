@@ -1,6 +1,9 @@
 import * as expect from 'expect'
-import { getContainer, useContainer } from '../src/container'
-import { Container as InversifyContainer } from 'inversify'
+import { getContainer, resolve, useContainer } from '../src/container'
+import { Container as InversifyContainer, injectable } from 'inversify'
+
+@injectable()
+class MyClass {}
 
 describe('Container', () => {
 
@@ -14,6 +17,12 @@ describe('Container', () => {
     useContainer(myContainer)
 
     expect(getContainer()).toBe(myContainer)
+  })
+
+  it('resolves a class', () => {
+    const object = resolve(MyClass)
+
+    expect(object instanceof MyClass).toBeTruthy()
   })
 
 })

@@ -12,3 +12,7 @@ export function getContainer () {
   }
   return _container
 }
+
+export function resolve<T> (command: inversifyInterfaces.Newable<T>) {
+  return getContainer().resolve<T>(command)
+}

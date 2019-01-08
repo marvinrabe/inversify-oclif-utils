@@ -1,4 +1,3 @@
-import { decorate, injectable } from 'inversify'
 import { CommandMetadata } from './reflection'
 import { METADATA_KEY } from './constants'
 
@@ -13,8 +12,8 @@ export function command (command: string) {
     Reflect.defineMetadata(METADATA_KEY.command, currentMetadata, target)
 
     // We need to create an array that contains the metadata of all
-    // the controllers in the application, the metadata cannot be
-    // attached to a controller. It needs to be attached to a global
+    // the commands in the application, the metadata cannot be
+    // attached to a command. It needs to be attached to a global.
     // We attach metadata to the Reflect object itself to avoid
     // declaring additonal globals. Also, the Reflect is avaiable
     // in both node and web browsers.
