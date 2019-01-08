@@ -7,8 +7,10 @@ class MyClass {}
 
 describe('Container', () => {
 
-  it('returns container', () => {
-    expect(getContainer() instanceof InversifyContainer).toBeTruthy()
+  it('throws error when no container is specfied', () => {
+    expect(() => {
+      getContainer()
+    }).toThrow('Container is not specified. Set it up with useContainer().');
   })
 
   it('assigns own container', () => {
