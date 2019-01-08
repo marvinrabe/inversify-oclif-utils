@@ -49,7 +49,7 @@
       "@oclif/plugin-help"
     ],
     "hooks": {
-      "init": "./lib/hooks/init/inversify.ts"
+      "init": "./lib/init.ts"
     }
   },
   "repository": "marvinrabe/oclif-plugin-inversify",
