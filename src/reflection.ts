@@ -1,8 +1,8 @@
-export const METADATA_KEY = {
+const METADATA_KEY = {
   command: 'container-oclif-utils:command'
 }
 
-export interface CommandMetadata {
+interface CommandMetadata {
   command: string
   target: any
 }
@@ -12,4 +12,12 @@ export function getCommandMetadata (): CommandMetadata[] {
     METADATA_KEY.command,
     Reflect
   ) || []
+}
+
+export function addCommandMetadata (newMetadata: CommandMetadata): void {
+  Reflect.defineMetadata(
+    METADATA_KEY.command,
+    [newMetadata, ...getCommandMetadata()],
+    Reflect
+  )
 }
