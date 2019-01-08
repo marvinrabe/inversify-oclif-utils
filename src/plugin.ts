@@ -7,11 +7,7 @@ export default class InversifyPlugin extends Config.Plugin {
   }
 
   get topics () {
-    return [{ name: 'complex' }]
-  }
-
-  get commandIDs (): string[] {
-    return getCommandMetadata().map((c: CommandMetadata) => c.command)
+    return []
   }
 
   get commands (): Config.Command.Plugin[] {
