@@ -4,60 +4,130 @@ inversify-oclif-utils
 Create [oclif](https://oclif.io/) commands with [InversifyJS](http://inversify.io/).
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/oclif-plugin-inversify.svg)](https://npmjs.org/package/oclif-plugin-inversify)
-[![Downloads/week](https://img.shields.io/npm/dw/oclif-plugin-inversify.svg)](https://npmjs.org/package/oclif-plugin-inversify)
-[![License](https://img.shields.io/npm/l/oclif-plugin-inversify.svg)](https://github.com/marvinrabe/oclif-plugin-inversify/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/inversify-oclif-utils.svg)](https://npmjs.org/package/inversify-oclif-utils)
+[![Downloads/week](https://img.shields.io/npm/dw/inversify-oclif-utils.svg)](https://npmjs.org/package/inversify-oclif-utils)
+[![License](https://img.shields.io/npm/l/inversify-oclif-utils.svg)](https://github.com/marvinrabe/inversify-oclif-utils/blob/master/package.json)
 [![CircleCI](https://circleci.com/gh/marvinrabe/inversify-oclif-utils/tree/master.svg?style=shield)](https://circleci.com/gh/marvinrabe/inversify-oclif-utils/tree/master)
 [![codecov](https://codecov.io/gh/marvinrabe/inversify-oclif-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/marvinrabe/inversify-oclif-utils)
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you up and running.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Make sure you have InversifyJS and Oclif installed.
 
-```
-Give examples
-```
+ * [Oclif instructions](https://oclif.io/docs/introduction)
+ * [InversifyJS instructions](https://github.com/inversify/InversifyJS/blob/master/wiki/installation.md)
+
+It's best to start with a fresh Oclif installation and add InversifyJS to it. Ofcourse you could install Oclif in an existing project manually (but you have to figure this out on your own).
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Install this plugin with npm:
 
-Say what the step will be
-
-```
-Give the example
+```bash
+npm install inversify-oclif-utils --save
 ```
 
-And repeat
+Or with Yarn:
 
-```
-until finished
+```bash
+yarn add inversify-oclif-utils
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Afterwards add it to your package.json:
+
+```json
+{
+  ...,
+  "oclif": {
+    ...,
+    "plugins": {
+      "inversify-oclif-utils"
+    }
+  }
+}
+```
 
 ## Creating Commands
 
+Now we will get you started with creating commands.
 
+### ... injecting Services
 
-## Running the tests
+If you want to inject other services into your commands, you must setup the container like this:
 
-Explain how to run the automated tests for this system
+```typescript
+import { useContainer } from 'inversify-oclif-utils'
+import { Container } from 'inversify'
 
+const container = new Container();
+useContainer(container);
 ```
-yarn test
+
+You do this before running any Oclif commands. For example, at the top of your Oclif "binary" in the `/bin` folder.
+
+Afterwards you can inject other services in your commands like this:
+
+```typescript
+import { Command } from 'inversify-oclif-utils'
+
+export class YourCommand extends Command {
+
+  @inject(FooService)
+  protected fooService!: FooService
+
+  async run () {
+    this.log(this.fooService.message())
+    return true
+  }
+}
 ```
 
-### Coding Style
+Please note, that you have to use my implementation of the Command class for it to work.
 
-Explain what these tests test and why
+### ... loading Commands dynamically
 
+If you want to dynamically load your commands into Oclif without putting them in a specified command directory (the default way in Oclif). You can use our `@command()` decorator.
+
+```typescript
+import { command } from 'inversify-oclif-utils'
+import { Command } from '@oclif/command'
+
+@command('your:command')
+export class YourCommand extends Command {
+  ...
+}
 ```
-yarn lint
+
+The command can then be run by:
+
+```bash
+./bin/YOURBIN your:command
+```
+
+Make sure you put commands that are loaded with the decorator not into the Oclif command directory. Otherwise it might be loaded twice.
+
+### ... or both
+
+You can do both things at once.
+
+```typescript
+import { Command, command } from 'inversify-oclif-utils'
+
+@command()
+export class YourCommand extends Command {
+
+  @inject(FooService)
+  protected fooService!: FooService
+
+  async run () {
+    this.log(this.fooService.message())
+    return true
+  }
+}
 ```
 
 ## Contributing
