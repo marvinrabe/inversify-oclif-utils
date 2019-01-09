@@ -5,6 +5,8 @@
   "author": "Marvin Rabe",
   "homepage": "https://github.com/marvinrabe/oclif-plugin-inversify",
   "bugs": "https://github.com/marvinrabe/oclif-plugin-inversify/issues",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -54,6 +56,7 @@
   },
   "repository": "marvinrabe/oclif-plugin-inversify",
   "scripts": {
+    "build": "rm -rf lib && tsc -b && oclif-dev manifest",
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest",
     "test": "nyc mocha",
