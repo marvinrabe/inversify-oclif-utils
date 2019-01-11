@@ -73,14 +73,15 @@ Afterwards you can inject other services in your commands like this:
 
 ```typescript
 import { Command } from 'inversify-oclif-utils'
+import { inject } from 'inversify'
 
 export class YourCommand extends Command {
 
   @inject(FooService)
-  protected fooService!: FooService
+  protected foo!: FooService
 
   async run () {
-    this.log(this.fooService.message())
+    this.log(this.foo.bar())
     return true
   }
 }
@@ -116,15 +117,16 @@ You can do both things at once.
 
 ```typescript
 import { Command, command } from 'inversify-oclif-utils'
+import { inject } from 'inversify'
 
-@command()
+@command('your:command')
 export class YourCommand extends Command {
 
   @inject(FooService)
-  protected fooService!: FooService
+  protected foo!: FooService
 
   async run () {
-    this.log(this.fooService.message())
+    this.log(this.foo.bar())
     return true
   }
 }
